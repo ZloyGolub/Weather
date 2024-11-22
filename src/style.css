@@ -67,7 +67,9 @@ header button:hover {
 /* Main Weather Section */
 main {
     text-align: center;
-    margin-top: 20px;
+    padding: 30px;
+    background-color: rgb(155, 201, 255);
+    border-radius: 20px;
 }
 
 /* Current Weather */
@@ -98,13 +100,6 @@ main {
 }
 
 /* Forecast Weather */
-.forecast-weather {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
 .forecast-weather ul {
     list-style-type: none;
     display: flex;
@@ -114,10 +109,11 @@ main {
 }
 
 .forecast-weather li {
+    color: #ffffff;
     text-align: center;
     font-size: 0.9em;
     padding: 10px;
-    background-color: #f0f8ff;
+    background-color: #007bff;
     border-radius: 8px;
     width: 60px;
 }
