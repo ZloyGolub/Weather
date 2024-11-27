@@ -1,3 +1,11 @@
+const Languages = {
+    ENGLISH: "English",
+    SPANISH: "Spanish",
+    FRENCH: "French",
+    GERMAN: "German",
+    ITALIAN: "Italian"
+};
+
 let weather = {
     "paris": {
         name: "paris",
@@ -23,7 +31,52 @@ let weather = {
 
 let button = document.querySelector("#Search");
 
+let now = new Date();
+let todayDate = document.querySelector("#todayTime");
+
+
+todayDate.innerHTML = `${weekDisplayer(now.getDay())} ${now.getDay()} ${monthDisplayerEnglish(now.getMonth(), Languages.ENGLISH)} 
+    ${now.getHours()}:${now.getMinutes()} year ${now.getFullYear()}
+`;
+
 button.addEventListener("click", changeWeatherAproach);
+
+
+function weekDisplayer(today, lang) {
+    const weeks = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    return weeks[today] || "Fatal error, weekDisplayer was called incorrectly";
+}
+
+
+function monthDisplayerEnglish(today, lang = Languages.ENGLISH) {
+    const monthEng = [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    ];
+
+    const monthEsp = [
+        "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+        "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+    ];
+
+    const monthFr = [
+        "Janvier", "Février", "Mars", "Avril", "Mai", "Juin",
+        "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"
+    ];
+
+    // Handle languages
+    switch (lang) {
+        case Languages.ENGLISH:
+            return monthEng[today] || "Fatal error, monthDisplayerEnglish was called incorrectly";
+        case Languages.SPANISH:
+            return monthEsp[today] || "Fatal error, monthDisplayerEnglish was called incorrectly";
+        case Languages.FRENCH:
+            return monthFr[today] || "Fatal error, monthDisplayerEnglish was called incorrectly";
+        default:
+            return "Language not supported";
+    }
+}
+
 
 function changeWeatherAproach(event){
     event.preventDefault();
@@ -39,9 +92,6 @@ function changeWeatherAproach(event){
     tempeture.textContent = weather[searchFieldValue].temp;
     humiditys.textContent = weather[searchFieldValue].humidity;
 }
-
-
-
 
 function changeCityName(event){
     event.preventDefault(); //prevents page from full relading
