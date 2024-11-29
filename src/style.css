@@ -7,7 +7,7 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f0f8ff;
+    background-color: #4d4d4d;
     color: #333;
     display: flex;
     align-items: center;
@@ -70,6 +70,10 @@ main {
     padding: 30px;
     background-color: rgb(155, 201, 255);
     border-radius: 20px;
+}
+
+input {
+    background-color: #f3f3f3;
 }
 
 /* Current Weather */
