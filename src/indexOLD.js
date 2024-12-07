@@ -89,3 +89,96 @@ let forecast = [
 ]
 
 console.log(forecast);
+
+
+//легаси куски кода. удалить когда проект будет логически закончен
+
+
+
+// geopositionNow()
+//     .then(coords => {
+//         console.log(`Latitude: ${coords.latitude}, Longitude: ${coords.longitude}`);
+//         let CurrentCity = `q=${coords.latitude},${coords.longitude}`//`q=Paris`;        
+//         let requestBuilded = `${baseURL}?${API_Key}&${CurrentCity}`;
+//         const xhr = new XMLHttpRequest();
+//         xhr.open("GET", requestBuilded, true);
+//         xhr.send();
+//         xhr.onreadystatechange = function () {
+//             if (xhr.readyState === 4 && xhr.status === 200) {
+//                 console.log("Respone:", JSON.parse(xhr.responseText));// log resone
+//             } else if (xhr.readyState === 4) {
+//                 console.log("Error", xhr.status, xhr.statusText); //log any errors
+//             }
+//         }
+//     })
+//     .catch(error => {
+//         console.error(error.message);
+//     });
+
+// let DefaultCity = `q=${geopositionNow()}`//`q=Paris`;
+// const API_Key = "key=1c9e128d855b4654820145517240611";
+// let requestBuilded = `http://api.weatherapi.com/v1/current.json?${API_Key}&${DefaultCity}`;
+// const xhr = new XMLHttpRequest();
+// xhr.open("GET", requestBuilded, true);
+// xhr.send();
+
+// xhr.onreadystatechange = function () {
+//     if (xhr.readyState === 4 && xhr.status === 200) {
+//         console.log("Respone:", JSON.parse(xhr.responseText));// log resone
+//     } else if (xhr.readyState === 4) {
+//         console.log("Error", xhr.status, xhr.statusText); //log any errors
+//     }
+// }
+
+
+//fake DB respone
+// let weather = {
+//     "paris": {
+//         name: "Paris",
+//         temp: 19.7,
+//         humidity: 90
+//     },
+//     "tokyo": {
+//         name: "Tokyo",
+//         temp: 14.7,
+//         humidity: 50
+//     },
+//     "nederlands": {
+//         name: "Nederlands",
+//         temp: 17.3,
+//         humidity: 30
+//     }
+//     , "san francisco": {
+//         name: "San Francisco",
+//         temp: 25.9,
+//         humidity: 40
+//     },
+// }
+
+// for (let city in weather) {
+//     console.log(weather[city].name);
+// }
+
+// Object.values(weather).forEach(city => { console.log(city.name) })
+
+/*//Interface language
+const Languages = {
+    ENGLISH: "English",
+    SPANISH: "Spanish",
+    FRENCH: "French",
+    GERMAN: "German",
+    ITALIAN: "Italian"
+};
+
+
+function isLanguageSupported(lang) {
+    return Object.values(Languages).includes(lang);
+}
+
+function validateLanguage(lang) {
+    if (!isLanguageSupported(lang)) {
+        throw new Error(`Language '${lang}' is not supported.`);
+    }
+}
+
+*/

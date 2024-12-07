@@ -5,6 +5,7 @@
         <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
         <title>Weather app</title>
         <link rel="stylesheet" href="src/style.css">
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     </head>
     <body>
         <Main>
@@ -16,13 +17,16 @@
             </header>
             <div class="curent weather">
                 <div>
-                    <h1 id="city">San francisco</h1>  
-                    <p id="today-time">
-                        Thursdat 17:54, clear sky
+                    <h1 id="city"> </h1>
+                    <h2 id="region"> </h2>
+                    <p>
+                        Updated on <strong id="updated-time"></strong>
                     </p>
-                    <p> Humidity: <strong id="humdyti">38</strong>, Wind: 3.13km/h</p>
-                    <div id="tempature">
-                        16°C
+                    <p> Humidity: <strong id="humidity"> </strong>, Wind speed: <strong id="wind-speed"></strong></p>
+                    <p id="description-text"></p>
+                    <div class="temperature">
+                        <span id="tempature"></span>
+                        <img id="weather-icon">
                     </div>
                 </div>                                
             </div>

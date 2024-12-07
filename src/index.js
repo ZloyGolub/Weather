@@ -1,4 +1,10 @@
-function geopositionNow() {
+//const axios = require("axios");
+let cordinates = {//default кординаты лондона 
+    latitude: 51.500736,
+    longitude: -0.124658
+}
+
+function geopositionNow() {//функция для нахождения геолокации
     return new Promise((resolve, reject) => {
         if ("geolocation" in navigator) {
             navigator.geolocation.getCurrentPosition(
@@ -8,116 +14,76 @@ function geopositionNow() {
                     resolve({ latitude, longitude }); //resolve for promise
                 },
                 error => {
-                    reject(new Error(`Error get location: ${error.message}`));
+                    resolve(cordinates);
                 }
             )
         } else { reject(new Error("Geolocation is not supported by your browser.")) }
     })
 }
 
-
-const API_Key = "key=1c9e128d855b4654820145517240611";
-const baseURL = "http://api.weatherapi.com/v1/current.json";
-
-geopositionNow()
-    .then(coords => {
-        console.log(`Latitude: ${coords.latitude}, Longitude: ${coords.longitude}`);
-        let CurrentCity = `q=${coords.latitude},${coords.longitude}`//`q=Paris`;        
-        let requestBuilded = `${baseURL}?${API_Key}&${CurrentCity}`;
-        const xhr = new XMLHttpRequest();
-        xhr.open("GET", requestBuilded, true);
-        xhr.send();
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                console.log("Respone:", JSON.parse(xhr.responseText));// log resone
-            } else if (xhr.readyState === 4) {
-                console.log("Error", xhr.status, xhr.statusText); //log any errors
-            }
-        }
-    })
-    .catch(error => {
-        console.error(error.message);
-    });
-
-
-
-//Interface language
-const Languages = {
-    ENGLISH: "English",
-    SPANISH: "Spanish",
-    FRENCH: "French",
-    GERMAN: "German",
-    ITALIAN: "Italian"
-};
-
-// let DefaultCity = `q=${geopositionNow()}`//`q=Paris`;
-// const API_Key = "key=1c9e128d855b4654820145517240611";
-// let requestBuilded = `http://api.weatherapi.com/v1/current.json?${API_Key}&${DefaultCity}`;
-// const xhr = new XMLHttpRequest();
-// xhr.open("GET", requestBuilded, true);
-// xhr.send();
-
-// xhr.onreadystatechange = function () {
-//     if (xhr.readyState === 4 && xhr.status === 200) {
-//         console.log("Respone:", JSON.parse(xhr.responseText));// log resone
-//     } else if (xhr.readyState === 4) {
-//         console.log("Error", xhr.status, xhr.statusText); //log any errors
-//     }
-// }
-
-
-
-
-function isLanguageSupported(lang) {
-    return Object.values(Languages).includes(lang);
-}
-
-function validateLanguage(lang) {
-    if (!isLanguageSupported(lang)) {
-        throw new Error(`Language '${lang}' is not supported.`);
-    }
-}
-
-
-
-//fake DB respone
-let weather = {
-    "paris": {
-        name: "Paris",
-        temp: 19.7,
-        humidity: 90
-    },
-    "tokyo": {
-        name: "Tokyo",
-        temp: 14.7,
-        humidity: 50
-    },
-    "nederlands": {
-        name: "Nederlands",
-        temp: 17.3,
-        humidity: 30
-    }
-    , "san francisco": {
-        name: "San Francisco",
-        temp: 25.9,
-        humidity: 40
-    },
-}
-
-// for (let city in weather) {
-//     console.log(weather[city].name);
-// }
-
-// Object.values(weather).forEach(city => { console.log(city.name) })
+//динамические данные на странице
+const city = document.querySelector("#city");
+const region = document.querySelector("#region");
+const lastUpdateTime = document.querySelector("#updated-time");
+const humidity = document.querySelector("#humidity");
+const temp_c = document.querySelector("#tempature");
+const wind_kph = document.querySelector("#wind-speed")
+const weatherPica = document.querySelector("#weather-icon");
+const descriptionText =  document.querySelector("#description-text")
 
 let button = document.querySelector("#Search");
-
 let now = new Date();
-let todayDate = document.querySelector("#today-time");
 
-todayDate.innerHTML = `${weekDisplayerEnglish(now.getDay())} ${now.getDay()} ${monthDisplayerEnglish(now.getMonth(), Languages.ENGLISH)}
-    ${now.getHours()}:${now.getMinutes()} year ${now.getFullYear()}
-`;
+
+const API_Key = "key=1c9e128d855b4654820145517240611";//хуй знает надо ли ключ сторить сейвово, я хуй знает как его сторить сейвово
+const baseURL = "http://api.weatherapi.com/v1/current.json";
+//запуск функции на старте приложения => потом запуск запроса на получение погоды с результатов этой функцици
+geopositionNow()
+.then(coords => {
+    console.log(`Latitude: ${coords.latitude}, Longitude: ${coords.longitude}`);
+    let CurrentCity = `q=${coords.latitude},${coords.longitude}`//`q=Paris`;        
+    let requestBuilded = `${baseURL}?${API_Key}&${CurrentCity}`;
+    axios.get(requestBuilded)
+    .then(respone => {
+        console.log(respone.data);
+        const location = respone.data.location;
+        const current = respone.data.current;
+        const condition = respone.data.current.condition; 
+
+        city.textContent = location.name;
+        region.textContent = location.region;
+
+        lastUpdateTime.textContent = current.last_updated;
+        humidity.textContent = current.humidity;
+        temp_c.textContent = `${current.temp_c}°C`;
+        wind_kph.textContent = `${current.wind_kph} km/h`;
+        descriptionText.textContent = condition.text;
+
+
+        weatherPica.src = condition.icon;
+    })
+    .catch(err => {console.log(err.message)})
+})//хуй знает как но я написла это своими ручками и оно работает
+//так же как и xhr, разве что эроры не ловит но и хуй с ними
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// todayDate.innerHTML = `${weekDisplayerEnglish(now.getDay())} ${now.getDay()} ${monthDisplayerEnglish(now.getMonth(), Languages.ENGLISH)}
+//     ${now.getHours()}:${now.getMinutes()} year ${now.getFullYear()}
+// `;
 
 function weekDisplayerEnglish(today, lang = Languages.ENGLISH) {
     validateLanguage(lang); // Ensure language is valid useless shit
@@ -168,12 +134,12 @@ function changeWeatherAproach(event) {
     event.preventDefault();
 
     const tempeture = document.querySelector("#tempature");
-    const humiditys = document.querySelector("#humdyti");
+    const humiditys = document.querySelector("#humidity");
     const searchField = document.querySelector("#search-field");
     const searchFieldValue = searchField.value.trim();
     const displayedCity = document.querySelector("#city");
     if (searchFieldValue in weather) {
-        console.log(`Temp ${weather[searchFieldValue].temp} humidyty ${weather[searchFieldValue].humidity} name  ${weather[searchFieldValue].name}`);
+        console.log(`Temp ${weather[searchFieldValue].temp} humidity ${weather[searchFieldValue].humidity} name  ${weather[searchFieldValue].name}`);
         displayedCity.textContent = weather[searchFieldValue].name;
         tempeture.textContent = weather[searchFieldValue].temp;
         humiditys.textContent = weather[searchFieldValue].humidity;
