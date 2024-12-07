@@ -78,7 +78,7 @@ input {
 
 /* Current Weather */
 .curent.weather {
-    background-color: #007bff;
+    background-color: #53a6ff;
     color: #fff;
     padding: 20px;
     border-radius: 8px;
@@ -134,9 +134,9 @@ input {
     text-align: center;
     font-size: 0.9em;
     padding: 10px;
-    background-color: #007bff;
+    background-color: #53a6ff;
     border-radius: 8px;
-    width: 60px;
+    width: 33%;/*хз можно ли так, но похуй, пойдёт */
 }
 
 /* Footer */
