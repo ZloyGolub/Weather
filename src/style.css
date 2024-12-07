@@ -215,3 +215,17 @@ footer a:hover {
         font-size: 0.9em; /* Adjust footer text size */
     }
 }
+
+@media (max-width: 320px) {
+    body {
+        font-size: 12px; /* Уменьшенный размер шрифта */
+    }
+
+    .temperature {
+        font-size: 2.5em; /* Еще меньше для экономии пространства */
+    }
+
+    .forecast-weather li {
+        padding: 8px;
+    }
+}
