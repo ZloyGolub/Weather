@@ -38,8 +38,8 @@ let now = new Date();
 
 
 const API_Key = "key=1c9e128d855b4654820145517240611";//хуй знает надо ли ключ сторить сейвово, я хуй знает как его сторить сейвово
-const baseURL = "http://api.weatherapi.com/v1/current.json";
-const forecastURL = "http://api.weatherapi.com/v1/forecast.json";
+const baseURL = "https://api.weatherapi.com/v1/current.json";
+const forecastURL = "https://api.weatherapi.com/v1/forecast.json";
 let forecastDays = 5;//всё равно будет 3 дня максимум потому что это бесплатный тариф апи
 let forecastDaysStr = `days=${forecastDays}`;
 //запуск функции на старте приложения => потом запуск запроса на получение погоды с результатов этой функцици
