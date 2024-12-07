@@ -155,3 +155,63 @@ footer a {
 footer a:hover {
     text-decoration: underline;
 }
+
+
+/* Media Query for Phones */
+@media (max-width: 480px) {
+    body {
+        flex-direction: column;
+        padding: 10px;
+        min-height: 100vh; /* Ensure it fills the screen */
+    }
+
+    body > div {
+        max-width: 100%; /* Full width on smaller screens */
+        width: 100%;
+        padding: 15px;
+    }
+
+    header form {
+        flex-direction: column; /* Stack input and button vertically */
+        gap: 10px;
+    }
+
+    header input[type="search"] {
+        width: 100%; /* Full width search bar */
+    }
+
+    header button {
+        width: 100%; /* Full width search button */
+    }
+
+    .curent.weather {
+        padding: 15px;
+        border-radius: 10px;
+        font-size: 0.9em; /* Slightly smaller font sizes */
+    }
+
+    .temperature {
+        font-size: 3em; /* Adjust temperature size */
+    }
+
+    .temperature img {
+        width: 60px; /* Adjust icon size */
+        height: 60px;
+    }
+
+    .forecast-weather ul {
+        flex-direction: column; /* Stack forecast items vertically */
+        gap: 15px;
+    }
+
+    .forecast-weather li {
+        width: 100%; /* Full width for each forecast item */
+        font-size: 1em; /* Slightly larger font size for readability */
+        padding: 15px;
+    }
+
+    footer {
+        margin-top: 10px;
+        font-size: 0.9em; /* Adjust footer text size */
+    }
+}
