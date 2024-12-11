@@ -6,18 +6,35 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background-color: #4d4d4d;
-    color: #333;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(to bottom, #2575fc, #26202c);
+    color: #fff;
+    text-align: center;
     display: flex;
-    align-items: center;
-    min-height: 100vh;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-content: center;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
+h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+.weather-container {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 400px;
+}
+
+.weather-container p {
+    font-size: 1.2rem;
+    margin: 10px 0;
+}
 /* Container */
 body > div {
     max-width: 500px;
@@ -43,11 +60,12 @@ header form {
 
 header input[type="search"] {
     padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 25px;
     outline: none;
-    width: 70%;
+    width: 80%;
+    max-width: 300px;
 }
 
 
@@ -55,6 +73,7 @@ header input[type="search"] {
     border-radius: 5px;
     position: absolute;
     background-color: #fff;
+    color: black;
     /* border: 1px solid #ccc; */
     /* max-height: 150px; */
     overflow-y: auto;
@@ -68,22 +87,24 @@ header input[type="search"] {
 }
 
 .suggestion-item:hover {
-    background-color: #f0f0f0;
+    background-color: #53a6ff;
 }
 
 
 header button {
     padding: 10px 20px;
-    font-size: 16px;
-    color: #fff;
-    background-color: #007bff;
+    font-size: 1rem;
     border: none;
-    border-radius: 5px;
+    border-radius: 25px;
+    background: #fff;
+    color: #000000;
     cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
 }
 
 header button:hover {
-    background-color: #0056b3;
+    background: #53a6ff;
+    color: #fff;
 }
 
 /* Main Weather Section */
@@ -143,6 +164,24 @@ input {
 }
 
 /* Forecast Weather */
+
+
+.forecast {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.forecast div {
+    text-align: center;
+    font-size: 1rem;
+}
+
+.forecast div img {
+    width: 50px;
+    height: 50px;
+}
+
 .forecast-weather ul {
     list-style-type: none;
     display: flex;
@@ -163,10 +202,9 @@ input {
 
 /* Footer */
 footer {
-    text-align: center;
     margin-top: 20px;
-    font-size: 0.8em;
-    color: #555;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
 }
 
 footer a {
@@ -200,7 +238,10 @@ footer a:hover {
 
     header input[type="search"] {
         width: 100%; /* Full width search bar */
+        max-width: none;
     }
+
+    
 
     header button {
         width: 100%; /* Full width search button */
