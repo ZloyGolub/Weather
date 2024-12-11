@@ -6,16 +6,17 @@
 }
 
 body {
-    margin: 0;
     font-family: 'Roboto', sans-serif;
     background: linear-gradient(to bottom, #2575fc, #26202c);
     color: #fff;
     text-align: center;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
 }
 
 h1 {
@@ -64,7 +65,7 @@ header input[type="search"] {
     border: none;
     border-radius: 25px;
     outline: none;
-    width: 80%;
+    width: 100%;
     max-width: 300px;
 }
 
