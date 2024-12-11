@@ -102,7 +102,7 @@ function ChangeAllFields(respone){
     weatherPica.src = condition.icon;
     //forecast блок
     console.log(forecastday.length);
-    //forecastList.innerHTML = "";
+    forecastList.innerHTML = "";
     forecastday.forEach(day => {
         const li = document.createElement("li");
         const weekDay = getDayOfWeekFromEpoch(day.date_epoch);
