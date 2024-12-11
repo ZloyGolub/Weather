@@ -36,7 +36,7 @@ header {
 
 header form {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     gap: 10px;
 }
@@ -49,6 +49,28 @@ header input[type="search"] {
     outline: none;
     width: 70%;
 }
+
+
+.suggestions {
+    border-radius: 5px;
+    position: absolute;
+    background-color: #fff;
+    /* border: 1px solid #ccc; */
+    /* max-height: 150px; */
+    overflow-y: auto;
+    z-index: 1000;
+    width: 300px;
+}
+
+.suggestion-item {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.suggestion-item:hover {
+    background-color: #f0f0f0;
+}
+
 
 header button {
     padding: 10px 20px;
