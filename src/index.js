@@ -145,7 +145,7 @@ const suggestionsContainer = document.getElementById("suggestions");
     async function fetchSuggestions(query) {
         try {
             // Replace with your API URL
-            const response = await axios.get(`http://api.weatherapi.com/v1/search.json?${API_Key}&q=${query}`);
+            const response = await axios.get(`https://api.weatherapi.com/v1/search.json?${API_Key}&q=${query}`);
             const cityName = response.data.map(city => city.name);
             console.log(cityName);
             return cityName; // Assume API returns a list of city names
