@@ -125,7 +125,7 @@ button.addEventListener("click", changeWeatherAproach);
 
 function changeWeatherAproach(event) {
     event.preventDefault();
-    console.log("nen");
+    if (searchcCity.value != null && searchcCity.value.length > 2){
     let CurrentCity = `q=${searchcCity.value.trim()}`;
     let requestBuilded = `${forecastURL}?${API_Key}&${CurrentCity}&${forecastDaysStr}`;
     axios.get(requestBuilded)
@@ -133,7 +133,7 @@ function changeWeatherAproach(event) {
                 console.log(respone.data);
                 ChangeAllFields(respone);
             })
-            .catch(err => { console.log(err.message) })
+            .catch(err => { console.log(err.message) })}
 }
 
 
