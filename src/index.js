@@ -1,4 +1,3 @@
-//const axios = require("axios");
 let cordinates = {//default london coordinates
     latitude: 51.500736,
     longitude: -0.124658
@@ -14,6 +13,7 @@ function geopositionNow() {//function for finding geolocation
                     resolve({ latitude, longitude }); //resolve for promise
                 },
                 error => {
+                    console.log(error.message);
                     resolve(cordinates);
                 }
             )
