@@ -2,7 +2,7 @@
 Powered by https://www.weatherapi.com/ 
 
 ## Site preview 
-![Image](https://github.com/ZloyGolub/Weather/img/preview.png)
+![Image](img/preview.png)
 - [**Site link**](https://zloygolub.github.io/Weather/)
 
 ## Usage
