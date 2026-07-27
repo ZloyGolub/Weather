@@ -38,17 +38,24 @@ let button = document.querySelector("#Search");
 let now = new Date();
 
 
-const API_Key = "key=1c9e128d855b4654820145517240611";//I don't know if I need to save the key, I don't know how to save it
-const baseURL = "https://api.weatherapi.com/v1/current.json";
-const forecastURL = "https://api.weatherapi.com/v1/forecast.json";
+const weatherApiBaseUrl = window.WEATHER_API_BASE_URL?.replace(/\/$/, "");
 let forecastDays = 3;//3 days max, api plan
-let forecastDaysStr = `days=${forecastDays}`;
+
+function getWeatherApiUrl(path) {
+    if (!weatherApiBaseUrl || weatherApiBaseUrl.includes("YOUR-SUBDOMAIN")) {
+        throw new Error("Weather API proxy is not configured. Update src/config.js with the deployed Worker URL.");
+    }
+
+    return `${weatherApiBaseUrl}/${path}`;
+}
+
 //launching a function at application startup => then launching a request to get the weather from the results of this function
 geopositionNow()
     .then(coords => {
-        let CurrentCity = `q=${coords.latitude},${coords.longitude}`;
-        let requestBuilded = `${forecastURL}?${API_Key}&${CurrentCity}&${forecastDaysStr}`;
-        return axios.get(requestBuilded);
+        const query = `${coords.latitude},${coords.longitude}`;
+        return axios.get(getWeatherApiUrl("forecast"), {
+            params: { q: query, days: forecastDays }
+        });
     })
     .then(response => {
         console.log(response.data);
@@ -62,10 +69,11 @@ button.addEventListener("click", changeWeatherApproach);
 function changeWeatherApproach(event) {
     event.preventDefault();
     if (searchCity.value != null && searchCity.value.length > 2) {
-        let CurrentCity = `q=${searchCity.value.trim()}`;
+        const query = searchCity.value.trim();
         searchCity.value = "";
-        let requestBuilded = `${forecastURL}?${API_Key}&${CurrentCity}&${forecastDaysStr}`;
-        axios.get(requestBuilded)
+        axios.get(getWeatherApiUrl("forecast"), {
+            params: { q: query, days: forecastDays }
+        })
             .then(response => {
                 console.log(response.data);
                 ChangeAllFields(response);
@@ -117,7 +125,9 @@ const suggestionsContainer = document.getElementById("suggestions");
 //example function to fetch data using Axios
 async function fetchSuggestions(query) {
     try {
-        const response = await axios.get(`https://api.weatherapi.com/v1/search.json?${API_Key}&q=${query}`);
+        const response = await axios.get(getWeatherApiUrl("search"), {
+            params: { q: query }
+        });
         const cityName = response.data.map(city => city.name);
         console.log(cityName);
         return cityName;

@@ -8,6 +8,33 @@ Powered by https://www.weatherapi.com/
 ## Usage
 If you want to preview site while editing use extension **Open live server** to make preview convenient
 
+## Secure API setup
+
+The browser never calls WeatherAPI directly. Requests go through the Cloudflare
+Worker in `worker/`, and the WeatherAPI key is stored as a Worker secret.
+
+1. Revoke the key that was previously committed to this repository and create a
+   new WeatherAPI key.
+2. Install and authenticate Wrangler:
+   ```sh
+   cd worker
+   npm install
+   npx wrangler login
+   ```
+3. Store the new key as a secret (do not add it to a file):
+   ```sh
+   npx wrangler secret put WEATHER_API_KEY
+   ```
+4. Deploy the proxy:
+   ```sh
+   npm run deploy
+   ```
+5. Copy the deployed `workers.dev` URL into `src/config.js`, then publish the
+   GitHub Pages site again.
+
+For local Worker development, create `worker/.dev.vars` with
+`WEATHER_API_KEY=your-development-key`. This file is ignored by Git.
+
 JSON and XML Weather API and Geolocation Developer API
 Designed for developers by developers, Weather API is the ultimate weather and geolocation API trusted by 500,000+ users worldwide.
 
