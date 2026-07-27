@@ -121,7 +121,7 @@ input {
 }
 
 /* Current Weather */
-.curent.weather {
+.current-weather {
     background-color: #53a6ff;
     color: #fff;
     padding: 20px;
@@ -129,12 +129,12 @@ input {
     margin-bottom: 20px;
 }
 
-.curent.weather h1 {
+.current-weather h1 {
     font-size: 2em;
     margin-bottom: 5px;
 }
 
-.curent.weather p {
+.current-weather p {
     font-size: 1em;
     line-height: 1.5;
 }
@@ -198,7 +198,7 @@ input {
     padding: 10px;
     background-color: #53a6ff;
     border-radius: 8px;
-    width: 33%;/*хз можно ли так, но похуй, пойдёт */
+    width: 33%; /* Three equal forecast columns */
 }
 
 /* Footer */
@@ -248,7 +248,7 @@ footer a:hover {
         width: 100%; /* Full width search button */
     }
 
-    .curent.weather {
+    .current-weather {
         padding: 15px;
         border-radius: 10px;
         font-size: 0.9em; /* Slightly smaller font sizes */

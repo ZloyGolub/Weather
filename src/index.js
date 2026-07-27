@@ -1,4 +1,4 @@
-let cordinates = {//default london coordinates
+let coordinates = {//default London coordinates
     latitude: 51.500736,
     longitude: -0.124658
 }
@@ -14,7 +14,7 @@ function geopositionNow() {//function for finding geolocation
                 },
                 error => {
                     console.log(error.message);
-                    resolve(cordinates);
+                    resolve(coordinates);
                 }
             )
         } else { reject(new Error("Geolocation is not supported by your browser.")) }
@@ -22,12 +22,12 @@ function geopositionNow() {//function for finding geolocation
 }
 
 //dynamic data on page
-const searchcCity = document.querySelector("#search-field");
+const searchCity = document.querySelector("#search-field");
 const city = document.querySelector("#city");
 const region = document.querySelector("#region");
 const lastUpdateTime = document.querySelector("#updated-time");
 const humidity = document.querySelector("#humidity");
-const temp_c = document.querySelector("#tempature");
+const tempC = document.querySelector("#temperature");
 const wind_kph = document.querySelector("#wind-speed")
 const weatherPica = document.querySelector("#weather-icon");
 const descriptionText = document.querySelector("#description-text")
@@ -58,34 +58,34 @@ geopositionNow()
     .finally(() => { console.log("Geolocation and forecast request completed.") });
 
 //search on button
-button.addEventListener("click", changeWeatherAproach);
-function changeWeatherAproach(event) {
+button.addEventListener("click", changeWeatherApproach);
+function changeWeatherApproach(event) {
     event.preventDefault();
-    if (searchcCity.value != null && searchcCity.value.length > 2) {
-        let CurrentCity = `q=${searchcCity.value.trim()}`;
-        searchcCity.value = "";
+    if (searchCity.value != null && searchCity.value.length > 2) {
+        let CurrentCity = `q=${searchCity.value.trim()}`;
+        searchCity.value = "";
         let requestBuilded = `${forecastURL}?${API_Key}&${CurrentCity}&${forecastDaysStr}`;
         axios.get(requestBuilded)
-            .then(respone => {
-                console.log(respone.data);
-                ChangeAllFields(respone);
+            .then(response => {
+                console.log(response.data);
+                ChangeAllFields(response);
             })
             .catch(err => { console.log(err.message) })
     }
 }
 
-function ChangeAllFields(respone) {
+function ChangeAllFields(response) {
     //easy access to response sections
-    const location = respone.data.location;
-    const current = respone.data.current;
-    const condition = respone.data.current.condition;
-    const forecastday = respone.data.forecast.forecastday;
+    const location = response.data.location;
+    const current = response.data.current;
+    const condition = response.data.current.condition;
+    const forecastday = response.data.forecast.forecastday;
     //main block
     city.textContent = location.name;
     region.textContent = location.region;
     lastUpdateTime.textContent = current.last_updated;
     humidity.textContent = current.humidity;
-    temp_c.textContent = `${current.temp_c}°C`;
+    tempC.textContent = `${current.temp_c}°C`;
     wind_kph.textContent = `${current.wind_kph} km/h`;
     uvInfo.textContent = `${current.uv}`;
     descriptionText.textContent = `${getDayOfWeekFromEpoch(current.last_updated_epoch)} ${condition.text}`;
@@ -106,11 +106,11 @@ function getDayOfWeekFromEpoch(timeEpoch) {
     // Create a new Date object from the epoch time (in milliseconds)
     const date = new Date(timeEpoch * 1000); // Convert seconds to milliseconds
     // Get the day of the week as a string
-    const dayOfWeek = date.toLocaleDateString("en-US", { weekday: "long" });//somethin standart
+    const dayOfWeek = date.toLocaleDateString("en-US", { weekday: "long" });//standard locale formatting
     return dayOfWeek;
 }
 
-//sugestions
+//suggestions
 const searchField = document.getElementById("search-field");
 const suggestionsContainer = document.getElementById("suggestions");
 
